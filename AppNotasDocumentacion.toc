@@ -1,0 +1,20 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Tecnologías utilizadas}{3}{section.2}%
+\contentsline {section}{\numberline {3}Arquitectura del proyecto}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Diagrama de clases}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Diagrama de flujo (agregar nota)}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Código PlantUML}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Flujo de uso}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Captura: Pantalla principal}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Captura: Crear/Editar nota}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Captura: Detalle de grupo}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Captura: Área de borrado por arrastre}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Captura: Menu nota/carpeta}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Captura: Menu nota}{12}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Captura: Menu carpeta}{13}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Funciones principales}{13}{section.5}%
+\contentsline {section}{\numberline {6}Áreas a mejorar para la próxima entrega}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Integración de Inteligencia Artificial}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Comodities y experiencia de usuario}{14}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Conclusiones}{15}{section.7}%
