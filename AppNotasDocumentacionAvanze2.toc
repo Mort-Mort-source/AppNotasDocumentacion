@@ -1,0 +1,10 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Tecnologías Utilizadas}{3}{section.2}%
+\contentsline {section}{\numberline {3}Integración con OpenRouter (IA)}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Cómo funciona la integración:}{3}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Pruebas Realizadas con la IA}{4}{section.4}%
+\contentsline {section}{\numberline {5}Configuración Manual de Alarmas}{6}{section.5}%
+\contentsline {section}{\numberline {6}Heurísticas de Nielsen: Evaluación del Proyecto}{7}{section.6}%
+\contentsline {section}{\numberline {7}Áreas de Mejora y Retos Futuros}{7}{section.7}%
+\contentsline {section}{\numberline {8}Conclusiones}{8}{section.8}%
