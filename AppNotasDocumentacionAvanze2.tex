@@ -1,16 +1,48 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
-\usepackage{enumitem}
-\usepackage{hyperref}
+\usepackage{float}
 \usepackage{geometry}
-\geometry{margin=2.5cm}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{enumitem}
 \usepackage{tocloft}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
+% Configuración de listings para código Dart
+\lstdefinelanguage{Dart}{
+  keywords={import, class, final, var, void, Future, String, int, bool, dynamic, @override, Widget, State, StatefulWidget, StatelessWidget, Text, Column, Row, Container, Scaffold, AppBar, ListView, Card, ListTile, FloatingActionButton, Icon, IconButton, PopupMenuButton, Dialog, AlertDialog, TextField, Navigator, MaterialPageRoute, Hive, Box, ValueListenableBuilder, Draggable, DragTarget, AnimatedContainer},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+  language=Dart,
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{white}
+}
+
 \title{\textbf{Smart Notes} \\ Aplicación de Notas Inteligente con IA}
-\author{Aaron Rodrigo Ramos Reyes \\ \small Interacción Humano Computadora \\ Universidad Autónoma Metropolitana – Unidad Cuajimalpa}
+\author{Aaron Rodrigo Ramos Reyes \\ Universidad Autónoma Metropolitana - Unidad Cuajimalpa}
 \date{\today}
 
 \begin{document}
@@ -23,24 +55,47 @@
 \newpage
 
 \section{Introducción}
-Smart Notes es una aplicación móvil desarrollada en Flutter que permite crear, organizar y gestionar notas de forma inteligente. 
+Smart Notes es una aplicación móvil desarrollada en Flutter que permite gestionar notas personales organizadas en grupos (carpetas). El proyecto implementa funcionalidades de arrastrar y soltar, personalización de colores, historial de edición (Undo/Redo) y persistencia local mediante Hive.
 
-La característica principal es su \textbf{asistente IA integrado}, que analiza automáticamente el contenido de las notas y sugiere acciones útiles como:
-\begin{itemize}
-    \item Configurar recordatorios automáticos (alarmas)
-    \item Crear o mover notas a grupos temáticos
-\end{itemize}
+La característica principal es su \textbf{asistente IA integrado}, que analiza automáticamente el contenido de las notas y sugiere acciones útiles como configurar recordatorios automáticos (alarmas) y crear o mover notas a grupos temáticos.
 
 La aplicación cuenta con un diseño minimalista, sistema de grupos, arrastrar y soltar, y notificaciones locales.
 
-\section{Tecnologías Utilizadas}
+\section{Tecnologías utilizadas}
 \begin{itemize}
-    \item \textbf{Flutter} + Dart (Framework multiplataforma)
-    \item \textbf{Hive} (Base de datos NoSQL ligera y rápida)
-    \item \textbf{flutter\_local\_notifications} (Para recordatorios)
-    \item \textbf{OpenRouter} (Servicio de Inteligencia Artificial)
-    \item Material Design 3 (Interfaz moderna y limpia)
+    \item \textbf{Lenguaje:} Dart 3.x
+    \item \textbf{Framework:} Flutter 3.x
+    \item \textbf{Persistencia local:} Hive + Hive Flutter (NoSQL, rápido y nativo)
+    \item \textbf{Generación de código:} build\_runner, hive\_generator
+    \item \textbf{Notificaciones:} flutter\_local\_notifications
+    \item \textbf{Inteligencia Artificial:} OpenRouter
+    \item \textbf{IDE:} Visual Studio Code
+    \item \textbf{Control de versiones:} Git
 \end{itemize}
+
+\section{Arquitectura del proyecto}
+La aplicación sigue una arquitectura basada en capas simplificada:
+\begin{itemize}
+    \item \textbf{Capa de presentación:} Widgets (screens, diálogos, widgets reutilizables).
+    \item \textbf{Capa de lógica de negocio:} Servicios (\texttt{AIService}, \texttt{IntelligentAssistant}) y manejo de estado con \texttt{ValueNotifier} + \texttt{ValueListenableBuilder}.
+    \item \textbf{Capa de datos:} Modelos (\texttt{Note}, \texttt{NoteGroup}) y adaptadores Hive.
+\end{itemize}
+
+\subsection{Diagrama de clases}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/clases.png}
+    \caption{Diagrama de clases UML (generado con PlantUML).}
+    \label{fig:clases}
+\end{figure}
+
+\subsection{Diagrama de flujo (agregar nota)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/flujo.png}
+    \caption{Flujo de creación de una nota desde el botón flotante hasta la persistencia en Hive.}
+    \label{fig:flujo}
+\end{figure}
 
 \section{Integración con OpenRouter (IA)}
 
@@ -66,48 +121,47 @@ Esta integración permite que la aplicación entienda el contexto de las notas y
 
 \section{Pruebas Realizadas con la IA}
 
-Se realizaron las siguientes pruebas para demostrar el funcionamiento del asistente inteligente. En cada caso se muestra una captura de pantalla del resultado.
+Se realizaron las siguientes pruebas para demostrar el funcionamiento del asistente inteligente:
 
 \begin{enumerate}
     \item \textbf{Reunión con el equipo de Flutter} \\
     Contenido: ``Mañana a las 10 am en la sala de juntas...'' \\
     \textbf{Resultado:} La IA detectó correctamente la fecha y sugirió configurar una alarma para el 26 de marzo a las 10:00.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{prueba1.png}
+        \includegraphics[width=0.45\textwidth]{prueba1.png}
         \caption{Sugerencia de alarma generada por la IA.}
     \end{figure}
 
     \item \textbf{Proyecto Flutter final} \\
     Contenido: ``Terminar la integración de Hive... Fecha de entrega: próxima semana'' \\
     \textbf{Resultado:} La IA sugirió crear un nuevo grupo llamado ``trabajo''.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{prueba2.png}
+        \includegraphics[width=0.45\textwidth]{prueba2.png}
         \caption{Sugerencia de grupo generada por la IA.}
     \end{figure}
 
     \item \textbf{Cita con el dentista} \\
     Contenido: ``El viernes 27 de marzo a las 15:30...'' \\
     \textbf{Resultado:} La IA detectó la cita y ofreció configurar un recordatorio.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{prueba3.png}
+        \includegraphics[width=0.45\textwidth]{prueba3.png}
         \caption{Sugerencia de recordatorio con fecha específica.}
     \end{figure}
 
     \item \textbf{Recordar comprar leche} \\
     Contenido: ``Ir al supermercado esta tarde'' \\
     \textbf{Resultado:} La IA sugirió configurar un recordatorio general.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{prueba4.png}
+        \includegraphics[width=0.45\textwidth]{prueba4.png}
         \caption{Sugerencia de recordatorio basada en horario.}
     \end{figure}
 \end{enumerate}
 
 \clearpage
-En todas las pruebas la IA respondió correctamente y las sugerencias fueron aceptadas por el usuario, demostrando la efectividad del sistema.
 
 \section{Configuración Manual de Alarmas}
 
@@ -120,59 +174,67 @@ Además de las sugerencias automáticas de la IA, la aplicación permite configu
     \item El usuario puede eliminar o modificar el recordatorio en cualquier momento.
 \end{itemize}
 
-Esta funcionalidad asegura que el usuario siempre tenga control total sobre sus recordatorios, incluso si decide no usar las sugerencias de la IA.
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{configuracion_alarma.png}
+    \includegraphics[width=0.45\textwidth]{configuracion_alarma.png}
     \caption{Pantalla de configuración manual de alarma.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{muestra.png}
-    \caption{Muestra de carpeta.}
+    \includegraphics[width=0.45\textwidth]{prueba de alarma.png}
+    \caption{Ejemplo de alarma configurada en una nota.}
 \end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.4\textwidth]{prueba de alarma.png}
-    \caption{esta imagen muestra una alarma configurada.}
-\end{figure}
-
-\clearpage
 
 \section{Heurísticas de Nielsen: Evaluación del Proyecto}
+
 A continuación se analiza cómo cumple la aplicación con las 10 heurísticas de usabilidad de Jakob Nielsen:
 
 \begin{enumerate}
-    \item \textbf{Visibilidad del estado del sistema:} \textit{Cumple}. La aplicación muestra siempre el estado actual (título en AppBar, lista de notas actualizada en tiempo real mediante \texttt{ValueListenableBuilder}).
-    \item \textbf{Relación entre el sistema y el mundo real:} \textit{Cumple}. Usa lenguaje cotidiano (``Nota'', ``Grupo'') e iconos reconocibles.
-    \item \textbf{Control y libertad del usuario:} \textit{Cumple}. Permite deshacer/rehacer, cancelar diálogos y navegar hacia atrás.
-    \item \textbf{Coherencia y estándares:} \textit{Cumple}. Sigue las convenciones de Material Design.
-    \item \textbf{Prevención de errores:} \textit{Cumple parcialmente}. Valida título vacío y pide confirmación antes de eliminar. Falta validar grupos duplicados.
-    \item \textbf{Reconocimiento en lugar de recuerdo:} \textit{Cumple}. Todas las acciones están visibles (menús, iconos, botones).
-    \item \textbf{Flexibilidad y eficiencia de uso:} \textit{Cumple}. Permite arrastrar y soltar para usuarios avanzados, además de menús contextuales.
-    \item \textbf{Diseño estético y minimalista:} \textit{Cumple}. Interfaz limpia, colores pastel, sin elementos superfluos.
-    \item \textbf{Ayuda a los usuarios a diagnosticar errores:} \textit{Cumple parcialmente}. Muestra mensajes claros al fallar la validación, pero no maneja errores de red de la IA.
-    \item \textbf{Ayuda y documentación:} \textit{No cumple}. No existe una pantalla de ayuda o tutorial integrado.
+    \item \textbf{Visibilidad del estado del sistema:} Cumple. La aplicación muestra siempre el estado actual mediante \texttt{ValueListenableBuilder}.
+    \item \textbf{Relación entre el sistema y el mundo real:} Cumple. Usa lenguaje cotidiano e iconos reconocibles.
+    \item \textbf{Control y libertad del usuario:} Cumple. Permite deshacer/rehacer, cancelar diálogos y navegar hacia atrás.
+    \item \textbf{Coherencia y estándares:} Cumple. Sigue las convenciones de Material Design.
+    \item \textbf{Prevención de errores:} Cumple parcialmente. Valida título vacío y pide confirmación antes de eliminar.
+    \item \textbf{Reconocimiento en lugar de recuerdo:} Cumple. Todas las acciones están visibles.
+    \item \textbf{Flexibilidad y eficiencia de uso:} Cumple. Permite arrastrar y soltar para usuarios avanzados.
+    \item \textbf{Diseño estético y minimalista:} Cumple. Interfaz limpia con colores pastel.
+    \item \textbf{Ayuda a los usuarios a diagnosticar errores:} Cumple parcialmente.
+    \item \textbf{Ayuda y documentación:} No cumple. Falta una pantalla de ayuda o tutorial.
 \end{enumerate}
 
-En general, el proyecto cumple con la mayoría de las heurísticas, destacando la usabilidad y la eficiencia en las tareas principales.
+\section{Metas Cumplidas y Comparación}
 
-\section{Áreas de Mejora y Retos Futuros}
-A pesar del buen funcionamiento actual, se identifican áreas de mejora:
-
+Se cumplieron las siguientes metas principales:
 \begin{itemize}
-    \item \textbf{Límite de tokens en modelos gratuitos:} Los modelos gratuitos de OpenRouter tienen un límite de tokens por minuto (30 req/min, 60k tokens/min). Esto puede ser insuficiente en producción si la aplicación escala. Como alternativa se podría implementar caché local de respuestas o migrar a un modelo de pago con mayor capacidad.
-    \item \textbf{Manejo de errores de red:} Actualmente, si la IA falla por falta de conexión, la app solo muestra un mensaje genérico. Se podría agregar un reintento automático o un modo offline con sugerencias locales.
-    \item \textbf{Sincronización en la nube:} La aplicación guarda solo en local. Un futuro desarrollo podría incluir sincronización con servicios en la nube para respaldo y uso multiplataforma.
-    \item \textbf{Ampliación de la detección de entidades:} Mejorar el prompt de IA para reconocer horarios más complejos (ej. ``cada lunes'', ``dentro de dos semanas'') y sugerir recordatorios recurrentes.
-    \item \textbf{Privacidad de los datos:} Asegurar que la API key esté protegida y que los datos de usuario no se compartan con terceros sin consentimiento.
+    \item Sistema completo de notas con persistencia local usando Hive.
+    \item Gestión avanzada de grupos (creación, edición, eliminación y asignación de notas).
+    \item Interacciones táctiles avanzadas: arrastrar y soltar (nota sobre nota, nota sobre grupo, eliminación por arrastre).
+    \item Personalización visual (6 colores pastel).
+    \item Historial de edición (Undo/Redo).
+    \item Integración exitosa con OpenRouter para sugerencias inteligentes de alarmas y grupos.
+    \item Notificaciones locales programables.
 \end{itemize}
 
-\section{Conclusiones}
-Smart Notes combina una interfaz moderna y fácil de usar con un asistente inteligente basado en OpenRouter, logrando una experiencia de usuario avanzada y útil. 
+Las funcionalidades de arrastrar y soltar y la integración con IA superaron las expectativas iniciales.
 
-La aplicación demuestra cómo la inteligencia artificial puede ser integrada de forma práctica en herramientas cotidianas para mejorar la productividad, cumpliendo con los principios fundamentales de interacción humano-computadora.
+\section{Áreas que Quedaron Pendientes y Mejoras Futuras}
+
+Aunque se avanzó significativamente, quedaron pendientes las siguientes funcionalidades:
+\begin{itemize}
+    \item Reconocimiento de texto mediante OCR (foto → nota).
+    \item Reconocimiento de voz (dictado).
+    \item Búsqueda global de notas.
+    \item Manejo robusto de errores de red y límites de la IA.
+    \item Sincronización en la nube.
+\end{itemize}
+
+\section{Conclusión y Aprendizaje}
+
+El desarrollo de \textbf{Smart Notes} ha sido una experiencia muy enriquecedora. Logré integrar tecnologías modernas como Flutter, Hive y OpenRouter, comprendiendo profundamente el ciclo completo de desarrollo de una aplicación móvil: desde el diseño de la arquitectura, la persistencia de datos, las interacciones táctiles avanzadas, hasta la integración de inteligencia artificial.
+
+Aprendí la importancia de una buena experiencia de usuario, la utilidad de las heurísticas de Nielsen y cómo la IA puede transformar una aplicación sencilla en una herramienta realmente inteligente y útil.
+
+Este proyecto me permitió consolidar conocimientos de programación móvil, diseño de interfaces y desarrollo de funcionalidades complejas, preparándome mejor para futuros desafíos en el campo de la Interacción Humano-Computadora.
 
 \end{document}

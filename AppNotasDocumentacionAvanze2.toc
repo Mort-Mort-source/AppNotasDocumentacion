@@ -1,10 +1,14 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
-\contentsline {section}{\numberline {2}Tecnologías Utilizadas}{3}{section.2}%
-\contentsline {section}{\numberline {3}Integración con OpenRouter (IA)}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Cómo funciona la integración:}{3}{subsection.3.1}%
-\contentsline {section}{\numberline {4}Pruebas Realizadas con la IA}{4}{section.4}%
-\contentsline {section}{\numberline {5}Configuración Manual de Alarmas}{6}{section.5}%
-\contentsline {section}{\numberline {6}Heurísticas de Nielsen: Evaluación del Proyecto}{7}{section.6}%
-\contentsline {section}{\numberline {7}Áreas de Mejora y Retos Futuros}{7}{section.7}%
-\contentsline {section}{\numberline {8}Conclusiones}{8}{section.8}%
+\contentsline {section}{\numberline {2}Tecnologías utilizadas}{3}{section.2}%
+\contentsline {section}{\numberline {3}Arquitectura del proyecto}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Diagrama de clases}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Diagrama de flujo (agregar nota)}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Integración con OpenRouter (IA)}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Cómo funciona la integración:}{5}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Pruebas Realizadas con la IA}{6}{section.5}%
+\contentsline {section}{\numberline {6}Configuración Manual de Alarmas}{8}{section.6}%
+\contentsline {section}{\numberline {7}Heurísticas de Nielsen: Evaluación del Proyecto}{9}{section.7}%
+\contentsline {section}{\numberline {8}Metas Cumplidas y Comparación}{9}{section.8}%
+\contentsline {section}{\numberline {9}Áreas que Quedaron Pendientes y Mejoras Futuras}{10}{section.9}%
+\contentsline {section}{\numberline {10}Conclusión y Aprendizaje}{10}{section.10}%
