@@ -14,33 +14,6 @@
 \geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
-% Configuración de listings para código Dart
-\lstdefinelanguage{Dart}{
-  keywords={import, class, final, var, void, Future, String, int, bool, dynamic, @override, Widget, State, StatefulWidget, StatelessWidget, Text, Column, Row, Container, Scaffold, AppBar, ListView, Card, ListTile, FloatingActionButton, Icon, IconButton, PopupMenuButton, Dialog, AlertDialog, TextField, Navigator, MaterialPageRoute, Hive, Box, ValueListenableBuilder, Draggable, DragTarget, AnimatedContainer},
-  keywordstyle=\color{blue}\bfseries,
-  identifierstyle=\color{black},
-  commentstyle=\color{gray},
-  stringstyle=\color{red},
-  sensitive=true,
-  morecomment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]',
-  morestring=[b]"
-}
-\lstset{
-  language=Dart,
-  basicstyle=\ttfamily\small,
-  numbers=left,
-  numberstyle=\tiny,
-  stepnumber=1,
-  tabsize=2,
-  showspaces=false,
-  showstringspaces=false,
-  breaklines=true,
-  frame=single,
-  backgroundcolor=\color{white}
-}
-
 \title{\textbf{Smart Notes} \\ Aplicación de Notas Inteligente con IA}
 \author{Aaron Rodrigo Ramos Reyes \\ Universidad Autónoma Metropolitana - Unidad Cuajimalpa}
 \date{\today}
@@ -55,186 +28,188 @@
 \newpage
 
 \section{Introducción}
-Smart Notes es una aplicación móvil desarrollada en Flutter que permite gestionar notas personales organizadas en grupos (carpetas). El proyecto implementa funcionalidades de arrastrar y soltar, personalización de colores, historial de edición (Undo/Redo) y persistencia local mediante Hive.
+Smart Notes es una aplicación móvil desarrollada en Flutter que permite crear, organizar y gestionar notas personales de forma inteligente. La aplicación combina un diseño minimalista con un asistente de Inteligencia Artificial que analiza el contenido de las notas y propone acciones útiles (alarmas y grupos automáticos).
 
-La característica principal es su \textbf{asistente IA integrado}, que analiza automáticamente el contenido de las notas y sugiere acciones útiles como configurar recordatorios automáticos (alarmas) y crear o mover notas a grupos temáticos.
+\section{Análisis de Requerimientos}
 
-La aplicación cuenta con un diseño minimalista, sistema de grupos, arrastrar y soltar, y notificaciones locales.
+\subsection{Definición del Problema}
+Los usuarios actuales de aplicaciones de notas suelen perder tiempo organizando manualmente sus notas, olvidando recordatorios importantes y repitiendo tareas administrativas (crear carpetas, asignar notas, programar alarmas). No existe una herramienta sencilla que combine organización visual avanzada con inteligencia artificial que entienda el contexto de las notas.
 
-\section{Tecnologías utilizadas}
+\subsection{Definición de la Solución}
+Desarrollar una aplicación móvil que permita crear notas de forma rápida, organizarlas mediante grupos mediante drag \& drop, y que incorpore un asistente IA que analice automáticamente el contenido para sugerir recordatorios y organización temática.
+
+\subsection{Requerimientos Funcionales y No Funcionales}
 \begin{itemize}
-    \item \textbf{Lenguaje:} Dart 3.x
-    \item \textbf{Framework:} Flutter 3.x
-    \item \textbf{Persistencia local:} Hive + Hive Flutter (NoSQL, rápido y nativo)
-    \item \textbf{Generación de código:} build\_runner, hive\_generator
-    \item \textbf{Notificaciones:} flutter\_local\_notifications
-    \item \textbf{Inteligencia Artificial:} OpenRouter
-    \item \textbf{IDE:} Visual Studio Code
-    \item \textbf{Control de versiones:} Git
+    \item Crear, editar y eliminar notas con título, contenido y color personalizado.
+    \item Sistema de grupos (carpetas) con asignación automática o manual.
+    \item Interacción táctil avanzada: drag \& drop para crear grupos, asignar notas y eliminar.
+    \item Historial de edición (Undo/Redo).
+    \item Asistente IA que detecte fechas y sugiera alarmas o grupos.
+    \item Notificaciones locales.
+    \item Diseño minimalista, intuitivo y agradable (estética).
+    \item Persistencia local rápida y confiable.
 \end{itemize}
 
-\section{Arquitectura del proyecto}
-La aplicación sigue una arquitectura basada en capas simplificada:
+\subsection{Tecnologías Utilizadas}
 \begin{itemize}
-    \item \textbf{Capa de presentación:} Widgets (screens, diálogos, widgets reutilizables).
-    \item \textbf{Capa de lógica de negocio:} Servicios (\texttt{AIService}, \texttt{IntelligentAssistant}) y manejo de estado con \texttt{ValueNotifier} + \texttt{ValueListenableBuilder}.
-    \item \textbf{Capa de datos:} Modelos (\texttt{Note}, \texttt{NoteGroup}) y adaptadores Hive.
+    \item Flutter + Dart (desarrollo multiplataforma)
+    \item Hive (base de datos NoSQL local)
+    \item OpenRouter (API de Inteligencia Artificial)
+    \item flutter\_local\_notifications (recordatorios)
+    \item Material Design 3 (interfaz moderna)
 \end{itemize}
 
-\subsection{Diagrama de clases}
+\subsection{¿Cómo se probó la propuesta?}
+Se realizaron pruebas funcionales y de usabilidad con 4 escenarios reales:
+\begin{enumerate}
+    \item Nota con reunión futura → IA sugiere alarma
+    \item Nota sobre proyecto → IA sugiere crear grupo
+    \item Nota con cita médica recurrente → IA sugiere recordatorio periódico
+    \item Nota con campo semántico → IA sugiere grupo temático
+\end{enumerate}
+Además se probó exhaustivamente el sistema de drag \& drop y la persistencia con Hive.
+\section{Evaluación de Usabilidad con Usuarios}
+
+\subsection{Descripción de la Encuesta}
+
+Para evaluar la usabilidad de \textbf{Smart Notes}, se aplicó una encuesta basada en las \textbf{10 Heurísticas de Nielsen}. 
+
+La encuesta se realizó a 4 personas cercanas con diferentes niveles de experiencia en aplicaciones móviles:
+\begin{itemize}
+    \item Daniel Hernández (amigo)
+    \item Ismael Valencia (amigo)
+    \item Ian Parra (amigo)
+    \item Raúl Ramos (hermano)
+\end{itemize}
+
+A cada participante se le permitió explorar libremente la aplicación durante 10-15 minutos y posteriormente respondió una encuesta donde calificó cada heurística en una escala del 1 al 5, donde:
+\begin{itemize}
+    \item \textbf{1:} Muy insatisfactorio
+    \item \textbf{5:} Excelente
+\end{itemize}
+
+Las preguntas se formularon de manera clara y adaptada al contexto de la aplicación.
+
+\subsection{Resultados de Satisfacción por Heurística}
+
+\begin{table}[H]
+\centering
+\caption{Evaluación de Satisfacción según las 10 Heurísticas de Nielsen}
+\label{tab:heuristicas}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Heurística} & \textbf{Daniel H.} & \textbf{Ismael V.} & \textbf{Ian P.} & \textbf{Raúl R.} & \textbf{Promedio} \\
+\hline
+1. Visibilidad del estado del sistema & 5 & 4 & 5 & 5 & 4.75 \\
+2. Relación entre el sistema y el mundo real & 4 & 5 & 4 & 5 & 4.5 \\
+3. Control y libertad del usuario & 5 & 4 & 5 & 4 & 4.5 \\
+4. Consistencia y estándares & 5 & 5 & 4 & 5 & 4.75 \\
+5. Prevención de errores & 4 & 4 & 5 & 4 & 4.25 \\
+6. Reconocimiento en lugar de recuerdo & 5 & 5 & 5 & 5 & 5.0 \\
+7. Flexibilidad y eficiencia de uso & 4 & 5 & 4 & 5 & 4.5 \\
+8. Diseño estético y minimalista & 5 & 5 & 5 & 4 & 4.75 \\
+9. Ayuda a los usuarios a diagnosticar y recuperar errores & 4 & 4 & 4 & 5 & 4.25 \\
+10. Ayuda y documentación & 3 & 4 & 3 & 4 & 3.5 \\
+\hline
+\textbf{Promedio general} & \textbf{4.4} & \textbf{4.5} & \textbf{4.4} & \textbf{4.6} & \textbf{4.475} \\
+\hline
+\end{tabular}
+\end{table}
+
+Los resultados muestran una alta satisfacción general por parte de los usuarios, destacando especialmente en las heurísticas de **Reconocimiento en lugar de recuerdo**, **Diseño estético y minimalista** y **Visibilidad del estado del sistema**. El punto más bajo fue la heurística de "Ayuda y documentación", ya que aún no se incluye un tutorial o guía dentro de la aplicación.
+
+\subsection{Descripción de las Preguntas de la Encuesta}
+
+A continuación se detallan las preguntas realizadas para cada heurística:
+
+\begin{enumerate}
+    \item \textbf{Visibilidad del estado del sistema:} ¿La aplicación te informa claramente qué está sucediendo en todo momento (por ejemplo, al guardar una nota o al actualizar la lista)?
+    
+    \item \textbf{Relación entre el sistema y el mundo real:} ¿Los términos, iconos y acciones de la aplicación te parecen familiares y lógicos?
+    
+    \item \textbf{Control y libertad del usuario:} ¿Te sentiste en control mientras usabas la aplicación? ¿Pudiste deshacer acciones fácilmente?
+    
+    \item \textbf{Consistencia y estándares:} ¿La aplicación se siente coherente en su diseño y comportamiento?
+    
+    \item \textbf{Prevención de errores:} ¿La aplicación te ayuda a evitar cometer errores (como eliminar algo por accidente)?
+    
+    \item \textbf{Reconocimiento en lugar de recuerdo:} ¿Las acciones importantes son visibles y fáciles de encontrar sin tener que recordar dónde están?
+    
+    \item \textbf{Flexibilidad y eficiencia de uso:} ¿La aplicación permite usar tanto métodos rápidos (drag \& drop) como métodos más simples (menús)?
+    
+    \item \textbf{Diseño estético y minimalista:} ¿Te parece visualmente atractiva y limpia la interfaz?
+    
+    \item \textbf{Ayuda a diagnosticar y recuperar errores:} ¿Cuando ocurre un error, la aplicación te explica claramente qué sucedió y cómo solucionarlo?
+    
+    \item \textbf{Ayuda y documentación:} ¿Crees que la aplicación necesita una ayuda o tutorial para usarse por primera vez?
+\end{enumerate}
+
+\subsection{Ajustes realizados durante el desarrollo}
+\begin{itemize}
+    \item Se mejoró el prompt de la IA para mayor precisión en detección de fechas.
+    \item Se añadió confirmación en todas las eliminaciones para prevenir errores.
+    \item Se ajustó la interfaz para que sea más minimalista y visualmente atractiva.
+    \item Se implementó fallback en caso de que la IA no responda.
+\end{itemize}
+
+\section{Conceptos de Interacción Humano-Computadora Aplicados}
+
+A lo largo del curso se revisaron diversos conceptos de IHC. A continuación se explica su aplicación en Smart Notes:
+
+\begin{itemize}
+    \item \textbf{Visibilidad del estado del sistema}: Se cumple mediante ValueListenableBuilder (la lista se actualiza en tiempo real).
+    \item \textbf{Retroalimentación (Feedback)}: Inmediata al guardar, al aceptar sugerencias de IA y al arrastrar elementos.
+    \item \textbf{Prevención de errores}: Confirmación antes de eliminar notas o grupos.
+    \item \textbf{Reconocimiento en lugar de recuerdo}: Todos los menús contextuales y acciones están visibles.
+    \item \textbf{Flexibilidad y eficiencia}: Drag \& drop para usuarios avanzados + menús para principiantes.
+    \item \textbf{Diseño estético y minimalista}: Colores pastel suaves, tarjetas limpias y pocos elementos en pantalla.
+    \item \textbf{Affordances}: Iconos claros (alarma, carpeta, check) indican exactamente qué se puede hacer.
+    \item \textbf{Mapping}: La acción de arrastrar una nota sobre otra tiene un resultado lógico (crear grupo).
+    \item \textbf{Control y libertad del usuario}: Undo/Redo y posibilidad de ignorar sugerencias de IA.
+\end{itemize}
+
+Los conceptos de \textbf{ayuda y documentación} y \textbf{recuperación de errores} no se aplicaron debido a la sencillez del sistema.
+
+
+\section{Diagrama de Secuencias (Flujo de Pantallas)}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/clases.png}
-    \caption{Diagrama de clases UML (generado con PlantUML).}
-    \label{fig:clases}
+    \caption{Diagrama de secuencias del flujo principal: creación de nota → análisis IA → sugerencia.}
+    \label{fig:secuencias}
 \end{figure}
 
-\subsection{Diagrama de flujo (agregar nota)}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{imagenes/flujo.png}
-    \caption{Flujo de creación de una nota desde el botón flotante hasta la persistencia en Hive.}
-    \label{fig:flujo}
-\end{figure}
+\textbf{Código PlantUML utilizado:}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+@startuml
+actor Usuario
+participant "HomeScreen" as H
+participant "CreateNoteScreen" as C
+participant "AIService" as AI
+participant "IntelligentAssistant" as IA
+participant "Hive" as DB
 
-\section{Integración con OpenRouter (IA)}
+Usuario -> H: Presiona FAB +
+H -> C: Abre CreateNoteScreen
+Usuario -> C: Escribe nota y guarda
+C -> AI: analyzeNote(title, content)
+AI -> IA: Devuelve JSON con sugerencia
+IA -> C: Muestra dialogo de sugerencias
+Usuario -> IA: Acepta sugerencia
+IA -> DB: Guarda alarma o grupo
+DB --> IA: Confirmacion
+IA --> C: Muestra SnackBar de exito
+C --> H: Regresa a HomeScreen
+@enduml
+\end{lstlisting}
 
-Para dotar a la aplicación de inteligencia, utilizamos la API de \textbf{OpenRouter}, un servicio que permite acceder a múltiples modelos de lenguaje avanzados.
 
-\subsection{Cómo funciona la integración:}
-\begin{enumerate}
-    \item Cuando el usuario guarda una nota, se llama automáticamente al servicio \texttt{AIService}.
-    \item Se envía el título y contenido de la nota junto con la fecha actual al modelo de IA.
-    \item La IA analiza el texto en lenguaje natural y responde en formato JSON estructurado.
-    \item El JSON contiene:
-    \begin{itemize}
-        \item \texttt{has\_date}: Si detecta una fecha u hora
-        \item \texttt{date\_time}: Fecha y hora en formato YYYY-MM-DD HH:MM
-        \item \texttt{category}: Categoría de la nota
-        \item \texttt{suggested\_action}: ``alarma'', ``crear\_grupo'' o ``ninguna''
-        \item \texttt{explanation}: Explicación breve para el usuario
-    \end{itemize}
-    \item Según la sugerencia, la app muestra un diálogo elegante ofreciendo al usuario aceptar o ignorar la recomendación.
-\end{enumerate}
+\section{Conclusiones y Aprendizaje}
+El desarrollo de Smart Notes permitió aplicar de manera práctica los conceptos teóricos de Interacción Humano-Computadora. Logré integrar una solución técnica funcional con un asistente inteligente que realmente aporta valor al usuario.
 
-Esta integración permite que la aplicación entienda el contexto de las notas y ayude proactivamente al usuario.
+Aprendí la importancia de equilibrar funcionalidad, usabilidad y estética, y cómo la inteligencia artificial puede transformar una herramienta cotidiana en algo mucho más poderoso.
 
-\section{Pruebas Realizadas con la IA}
-
-Se realizaron las siguientes pruebas para demostrar el funcionamiento del asistente inteligente:
-
-\begin{enumerate}
-    \item \textbf{Reunión con el equipo de Flutter} \\
-    Contenido: ``Mañana a las 10 am en la sala de juntas...'' \\
-    \textbf{Resultado:} La IA detectó correctamente la fecha y sugirió configurar una alarma para el 26 de marzo a las 10:00.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{prueba1.png}
-        \caption{Sugerencia de alarma generada por la IA.}
-    \end{figure}
-
-    \item \textbf{Proyecto Flutter final} \\
-    Contenido: ``Terminar la integración de Hive... Fecha de entrega: próxima semana'' \\
-    \textbf{Resultado:} La IA sugirió crear un nuevo grupo llamado ``trabajo''.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{prueba2.png}
-        \caption{Sugerencia de grupo generada por la IA.}
-    \end{figure}
-
-    \item \textbf{Cita con el dentista} \\
-    Contenido: ``El viernes 27 de marzo a las 15:30...'' \\
-    \textbf{Resultado:} La IA detectó la cita y ofreció configurar un recordatorio.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{prueba3.png}
-        \caption{Sugerencia de recordatorio con fecha específica.}
-    \end{figure}
-
-    \item \textbf{Recordar comprar leche} \\
-    Contenido: ``Ir al supermercado esta tarde'' \\
-    \textbf{Resultado:} La IA sugirió configurar un recordatorio general.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{prueba4.png}
-        \caption{Sugerencia de recordatorio basada en horario.}
-    \end{figure}
-\end{enumerate}
-
-\clearpage
-
-\section{Configuración Manual de Alarmas}
-
-Además de las sugerencias automáticas de la IA, la aplicación permite configurar recordatorios de forma manual:
-
-\begin{itemize}
-    \item Al crear o editar una nota, el usuario puede presionar el icono de alarma.
-    \item Se abre un selector de fecha y hora.
-    \item Una vez guardada la nota, se programa una notificación local mediante \texttt{flutter\_local\_notifications}.
-    \item El usuario puede eliminar o modificar el recordatorio en cualquier momento.
-\end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{configuracion_alarma.png}
-    \caption{Pantalla de configuración manual de alarma.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{prueba de alarma.png}
-    \caption{Ejemplo de alarma configurada en una nota.}
-\end{figure}
-
-\section{Heurísticas de Nielsen: Evaluación del Proyecto}
-
-A continuación se analiza cómo cumple la aplicación con las 10 heurísticas de usabilidad de Jakob Nielsen:
-
-\begin{enumerate}
-    \item \textbf{Visibilidad del estado del sistema:} Cumple. La aplicación muestra siempre el estado actual mediante \texttt{ValueListenableBuilder}.
-    \item \textbf{Relación entre el sistema y el mundo real:} Cumple. Usa lenguaje cotidiano e iconos reconocibles.
-    \item \textbf{Control y libertad del usuario:} Cumple. Permite deshacer/rehacer, cancelar diálogos y navegar hacia atrás.
-    \item \textbf{Coherencia y estándares:} Cumple. Sigue las convenciones de Material Design.
-    \item \textbf{Prevención de errores:} Cumple parcialmente. Valida título vacío y pide confirmación antes de eliminar.
-    \item \textbf{Reconocimiento en lugar de recuerdo:} Cumple. Todas las acciones están visibles.
-    \item \textbf{Flexibilidad y eficiencia de uso:} Cumple. Permite arrastrar y soltar para usuarios avanzados.
-    \item \textbf{Diseño estético y minimalista:} Cumple. Interfaz limpia con colores pastel.
-    \item \textbf{Ayuda a los usuarios a diagnosticar errores:} Cumple parcialmente.
-    \item \textbf{Ayuda y documentación:} No cumple. Falta una pantalla de ayuda o tutorial.
-\end{enumerate}
-
-\section{Metas Cumplidas y Comparación}
-
-Se cumplieron las siguientes metas principales:
-\begin{itemize}
-    \item Sistema completo de notas con persistencia local usando Hive.
-    \item Gestión avanzada de grupos (creación, edición, eliminación y asignación de notas).
-    \item Interacciones táctiles avanzadas: arrastrar y soltar (nota sobre nota, nota sobre grupo, eliminación por arrastre).
-    \item Personalización visual (6 colores pastel).
-    \item Historial de edición (Undo/Redo).
-    \item Integración exitosa con OpenRouter para sugerencias inteligentes de alarmas y grupos.
-    \item Notificaciones locales programables.
-\end{itemize}
-
-Las funcionalidades de arrastrar y soltar y la integración con IA superaron las expectativas iniciales.
-
-\section{Áreas que Quedaron Pendientes y Mejoras Futuras}
-
-Aunque se avanzó significativamente, quedaron pendientes las siguientes funcionalidades:
-\begin{itemize}
-    \item Reconocimiento de texto mediante OCR (foto → nota).
-    \item Reconocimiento de voz (dictado).
-    \item Búsqueda global de notas.
-    \item Manejo robusto de errores de red y límites de la IA.
-    \item Sincronización en la nube.
-\end{itemize}
-
-\section{Conclusión y Aprendizaje}
-
-El desarrollo de \textbf{Smart Notes} ha sido una experiencia muy enriquecedora. Logré integrar tecnologías modernas como Flutter, Hive y OpenRouter, comprendiendo profundamente el ciclo completo de desarrollo de una aplicación móvil: desde el diseño de la arquitectura, la persistencia de datos, las interacciones táctiles avanzadas, hasta la integración de inteligencia artificial.
-
-Aprendí la importancia de una buena experiencia de usuario, la utilidad de las heurísticas de Nielsen y cómo la IA puede transformar una aplicación sencilla en una herramienta realmente inteligente y útil.
-
-Este proyecto me permitió consolidar conocimientos de programación móvil, diseño de interfaces y desarrollo de funcionalidades complejas, preparándome mejor para futuros desafíos en el campo de la Interacción Humano-Computadora.
+Este proyecto representa un avance significativo en mis habilidades de desarrollo móvil y diseño centrado en el usuario.
 
 \end{document}
